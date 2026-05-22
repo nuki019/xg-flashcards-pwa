@@ -45,8 +45,19 @@ function init() {
   renderModeButtons();
   bindEvents();
   registerServiceWorker();
+  recordPageView();
   setCurrentCard(pickNextCard());
   renderStats();
+}
+
+function recordPageView() {
+  if (window.location.hostname !== "nuki019.github.io") return;
+  const counter = new Image();
+  counter.decoding = "async";
+  counter.referrerPolicy = "no-referrer-when-downgrade";
+  counter.src =
+    "https://hits.sh/nuki019.github.io/xg-flashcards-pwa.svg?view=today-total&label=visits&style=flat-square&color=1f6f64&ts=" +
+    Date.now();
 }
 
 function bindEvents() {
