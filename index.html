@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f7f2" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="习概闪卡" />
+    <title>习概闪卡</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="assets/icon-192.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="title-block">
+          <p class="eyebrow">习思想复习闪卡</p>
+          <h1 id="deckTitle">选择题库</h1>
+        </div>
+        <button class="install-button" id="installButton" type="button" hidden>安装</button>
+      </header>
+
+      <section class="mode-panel" aria-label="题库入口">
+        <button class="mode-button selected" id="subjectiveMode" type="button" data-mode="subjective">
+          <strong>主观题</strong>
+          <span id="subjectiveCount">0 张</span>
+        </button>
+        <button class="mode-button" id="objectiveMode" type="button" data-mode="objective">
+          <strong>客观题</strong>
+          <span id="objectiveCount">0 张</span>
+        </button>
+      </section>
+
+      <section class="progress-panel" aria-label="学习进度">
+        <div class="progress-track" aria-hidden="true">
+          <span id="progressBar"></span>
+        </div>
+        <div class="stat-grid">
+          <div>
+            <span id="studiedCount">0/0</span>
+            <small>已学</small>
+          </div>
+          <div>
+            <span id="masteryPercent">0%</span>
+            <small>掌握度</small>
+          </div>
+          <div>
+            <span id="todayCount">0</span>
+            <small>今日</small>
+          </div>
+        </div>
+      </section>
+
+      <main class="study-area">
+        <article class="flashcard" id="flashcard" role="button" tabindex="0" aria-live="polite">
+          <div class="flashcard-inner">
+            <div class="card-face card-face-front">
+              <div class="card-meta">
+                <span id="cardChapter">未分章</span>
+                <span id="cardScore">未学习</span>
+              </div>
+              <div class="card-content">
+                <p class="face-label">题目</p>
+                <div class="question-text" id="questionText"></div>
+              </div>
+            </div>
+            <div class="card-face card-face-back">
+              <div class="card-meta">
+                <span id="answerChapter">未分章</span>
+                <span id="answerScore">未学习</span>
+              </div>
+              <div class="card-content">
+                <p class="face-label">答案</p>
+                <div class="answer-text" id="answerText"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <section class="rating-panel" id="ratingPanel" hidden>
+        <p>掌握程度</p>
+        <div class="rating-buttons" id="ratingButtons">
+          <button type="button" data-score="1">1</button>
+          <button type="button" data-score="2">2</button>
+          <button type="button" data-score="3">3</button>
+          <button type="button" data-score="4">4</button>
+          <button type="button" data-score="5">5</button>
+          <button class="cut-button" id="cutButton" type="button">会</button>
+        </div>
+        <button class="undo-button" id="undoCutButton" type="button" hidden>撤销上一次标会</button>
+      </section>
+
+      <footer class="action-row">
+        <button id="nextButton" type="button">换一张</button>
+        <button id="resetButton" type="button">重置进度</button>
+      </footer>
+    </div>
+
+    <script src="data/cards.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

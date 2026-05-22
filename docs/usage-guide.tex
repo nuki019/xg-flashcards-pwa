@@ -1,0 +1,156 @@
+\documentclass[11pt,a4paper]{ctexart}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{titlesec}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue
+}
+
+\setlist[itemize]{leftmargin=2em,itemsep=0.25em}
+\setlist[enumerate]{leftmargin=2em,itemsep=0.25em}
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.8em}{}
+
+\title{\textbf{习思想复习闪卡 PWA 使用说明}}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{应用介绍}
+
+本应用是一个面向手机端复习的纯前端 PWA 闪卡工具，用于习近平新时代中国特色社会主义思想概论相关内容的背诵和自测。应用不依赖后端服务器，题库、页面和图标都在本地文件中，学习记录保存在当前浏览器本机。
+
+\subsection{核心能力}
+\begin{itemize}
+  \item 分为“主观题”和“客观题”两个入口，适合长答案背诵和短概念自测。
+  \item 点击或滑动闪卡可查看答案，查看答案后可用 1--5 分标记掌握程度。
+  \item 客观题支持“会”按钮，标会后该题不再出现，并支持撤销上一次标会。
+  \item 自动记录已学数量、掌握度、今日学习数量、出现次数和最后复习时间。
+  \item 支持离线使用、添加到桌面、全屏式运行。
+\end{itemize}
+
+\subsection{题库说明}
+\begin{itemize}
+  \item 当前题库共 250 张卡片，其中主观题 196 张、客观题 54 张。
+  \item 第十五至第十七章内容已按复习范围删除。
+  \item 客观题范围控制在背诵手册内，并对重复概念做了合并。
+  \item O020 已修正为：教育是民族复兴、社会进步的基石。
+  \item 题库审阅文件为 \texttt{data/flashcards-review.csv}，可用 Excel、WPS 或 Numbers 打开。
+\end{itemize}
+
+\section{发布包内容}
+
+压缩包解压后，主要包含以下文件：
+
+\begin{longtable}{>{\ttfamily}p{0.35\linewidth}p{0.55\linewidth}}
+\toprule
+文件或目录 & 用途 \\
+\midrule
+index.html & 应用入口页面 \\
+styles.css & 手机端界面样式 \\
+app.js & 闪卡逻辑、学习记录、随机算法 \\
+sw.js & 离线缓存脚本 \\
+manifest.webmanifest & PWA 安装配置 \\
+data/cards.js & 应用实际读取的题库 \\
+data/cards.json & 可读 JSON 题库备份 \\
+data/flashcards-review.csv & 两列审阅题库，可继续人工修改 \\
+assets/ & 桌面图标 \\
+docs/usage-guide.pdf & 本说明文档 \\
+\bottomrule
+\end{longtable}
+
+\section{移动端使用方式}
+
+\subsection{iPhone / iPad}
+\begin{enumerate}
+  \item 将发布包放到一个可访问的网页位置，例如电脑临时本地服务、学校内网空间、GitHub Pages、Netlify、Vercel 等静态网页托管。
+  \item 用 Safari 打开应用网址。
+  \item 点击 Safari 底部的分享按钮。
+  \item 选择“添加到主屏幕”。
+  \item 从桌面图标进入后，可按接近原生应用的形式全屏使用。
+\end{enumerate}
+
+\textbf{注意：}iOS 上添加到主屏幕建议使用 Safari。微信、QQ 或其他内置浏览器可能无法完整安装 PWA。
+
+\subsection{Android}
+\begin{enumerate}
+  \item 用 Chrome 或 Edge 打开应用网址。
+  \item 浏览器出现安装提示时，点击“安装”；也可以在浏览器菜单中选择“添加到主屏幕”或“安装应用”。
+  \item 安装后从桌面图标进入。
+  \item 首次打开加载完成后，之后在无网络状态下也能继续复习。
+\end{enumerate}
+
+\textbf{注意：}不同安卓系统的按钮名称略有差异，但一般都在浏览器右上角菜单中。
+
+\subsection{电脑端预览}
+\begin{enumerate}
+  \item 解压发布包。
+  \item 在发布包目录启动一个静态网页服务。
+  \item 浏览器访问对应地址即可预览。
+\end{enumerate}
+
+如果电脑安装了 Python，可以在发布包目录运行：
+
+\begin{verbatim}
+python -m http.server 5173
+\end{verbatim}
+
+然后访问：
+
+\begin{verbatim}
+http://127.0.0.1:5173/
+\end{verbatim}
+
+\section{分享给手机}
+
+\subsection{同一局域网临时使用}
+\begin{enumerate}
+  \item 电脑和手机连接同一个 Wi-Fi。
+  \item 在发布包目录启动静态网页服务。
+  \item 查看电脑的局域网 IP，例如 \texttt{192.168.x.x}。
+  \item 手机浏览器访问 \texttt{http://电脑IP:5173/}。
+\end{enumerate}
+
+这种方式适合临时自用。电脑关机或服务关闭后，手机无法继续重新访问，但已安装并完成缓存的 PWA 通常仍可离线打开。
+
+\subsection{长期分享}
+
+如果需要发给同学长期使用，建议上传到任意静态网页托管平台。只要平台能原样提供 \texttt{index.html}、\texttt{app.js}、\texttt{sw.js}、\texttt{manifest.webmanifest} 和 \texttt{data/}、\texttt{assets/} 目录即可。
+
+\section{学习数据说明}
+
+学习记录只保存在当前设备、当前浏览器中，不会上传服务器。记录包括：
+\begin{itemize}
+  \item 掌握度评分；
+  \item 出现次数；
+  \item 最后复习时间；
+  \item 客观题是否已标会。
+\end{itemize}
+
+清空浏览器网站数据、切换浏览器或换手机，都会导致学习记录不共享。题库本身不会因清空记录而删除。
+
+\section{常见问题}
+
+\subsection{为什么手机上没有出现安装按钮？}
+
+请优先使用 Safari、Chrome 或 Edge 打开。部分内置浏览器不支持完整 PWA 安装。也可以从浏览器菜单中手动选择“添加到主屏幕”。
+
+\subsection{为什么修改后手机还是旧版本？}
+
+PWA 会缓存页面文件。遇到旧版本时，先关闭桌面图标打开的应用，再用浏览器重新访问一次页面；必要时清除该网站数据后重新添加到桌面。
+
+\subsection{CSV 可以直接改吗？}
+
+CSV 主要用于人工审阅。当前应用读取的是 \texttt{data/cards.js}。如果后续需要让应用直接读取修改后的 CSV，需要再增加 CSV 导入逻辑，或将 CSV 修改同步回题库生成流程。
+
+\end{document}
