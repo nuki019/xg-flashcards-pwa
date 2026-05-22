@@ -8,19 +8,6 @@
 
 使用说明 PDF：<https://nuki019.github.io/xg-flashcards-pwa/docs/usage-guide.pdf>
 
-## 校园墙分享文案
-
-做了一个习概复习闪卡网页，手机打开就能刷题，可以添加到桌面，也能离线用。
-
-- 主观题 / 客观题分开刷
-- 点击卡片看答案
-- 1-5 分标记掌握程度
-- 客观题会了可以点“会”，之后不再出现
-- 学习记录保存在自己手机浏览器里，不会上传
-
-入口：<https://nuki019.github.io/xg-flashcards-pwa/>
-
-如果发现题目、答案、格式有问题，欢迎在 GitHub 提 issue，或者直接提 PR 修改题库。
 
 ## 反馈和共建
 
