@@ -58,6 +58,7 @@ function recordPageView() {
   counter.src =
     "https://hits.sh/nuki019.github.io/xg-flashcards-pwa.svg?view=today-total&label=visits&style=flat-square&color=1f6f64&ts=" +
     Date.now();
+  window.__visitCounterImage = counter;
 }
 
 function bindEvents() {
