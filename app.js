@@ -19,6 +19,7 @@ const elements = {
   answerChapter: document.querySelector("#answerChapter"),
   answerScore: document.querySelector("#answerScore"),
   questionText: document.querySelector("#questionText"),
+  answerQuestionText: document.querySelector("#answerQuestionText"),
   answerText: document.querySelector("#answerText"),
   ratingPanel: document.querySelector("#ratingPanel"),
   ratingButtons: document.querySelector("#ratingButtons"),
@@ -62,11 +63,11 @@ function recordPageView() {
 }
 
 function bindEvents() {
-  elements.flashcard.addEventListener("click", showAnswer);
+  elements.flashcard.addEventListener("click", toggleAnswer);
   elements.flashcard.addEventListener("keydown", (event) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      showAnswer();
+      toggleAnswer();
     }
     if (event.key === "ArrowRight") {
       event.preventDefault();
@@ -191,6 +192,7 @@ function renderCard(answerVisible) {
     elements.answerChapter.textContent = elements.cardChapter.textContent;
     elements.answerScore.textContent = "";
     elements.questionText.textContent = activeMode === "objective" ? "客观题已全部标会" : "没有可用闪卡";
+    elements.answerQuestionText.textContent = "";
     elements.answerText.textContent = activeMode === "objective" ? "可点击撤销上一次标会，或重置进度。" : "";
     elements.flashcard.classList.remove("is-flipped");
     elements.ratingPanel.hidden = activeMode !== "objective";
@@ -207,6 +209,7 @@ function renderCard(answerVisible) {
   elements.answerChapter.textContent = meta;
   elements.answerScore.textContent = formatScore(record);
   elements.questionText.textContent = currentCard.question;
+  elements.answerQuestionText.textContent = currentCard.question;
   elements.answerText.textContent = currentCard.answer;
   elements.flashcard.classList.toggle("is-flipped", answerVisible);
   elements.ratingPanel.hidden = !answerVisible;
@@ -221,9 +224,9 @@ function markSelectedScore(score) {
   }
 }
 
-function showAnswer() {
-  if (!currentCard || isAnswerVisible) return;
-  renderCard(true);
+function toggleAnswer() {
+  if (!currentCard) return;
+  renderCard(!isAnswerVisible);
 }
 
 function rateCurrent(score) {
